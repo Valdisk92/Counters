@@ -44,6 +44,15 @@ public class MainActivity extends Activity {
                 Intent intent = new Intent(this, AddCounterActivity.class);
                 startActivityForResult(intent, 1);
                 return true;
+
+            case R.id.action_clear_db:
+                DB db = new DB(this);
+                db.open();
+                db.clearDB();
+                db.close();
+                Cursor cursor = adapter.getCursor();
+                cursor.requery();
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }

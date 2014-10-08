@@ -24,6 +24,13 @@ public class DB {
         database = dbHelper.getWritableDatabase();
     }
 
+    public void clearDB() {
+        database.execSQL("DELETE FROM " + CountersContract.CountersEntry.TABLE_NAME + ";");
+        database.execSQL("VACUUM;");
+        database.execSQL("DELETE FROM " + CountersContract.ValuesEntry.TABLE_NAME + ";");
+        database.execSQL("VACUUM;");
+    }
+
     public Cursor getAllData(String tableName) {
         return database.query(tableName, null, null, null, null, null, null);
     }

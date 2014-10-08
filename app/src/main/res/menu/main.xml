@@ -6,4 +6,9 @@
         android:orderInCategory="1"
         android:showAsAction="ifRoom"
         android:icon="@drawable/ic_action_new"/>
+
+    <item android:id="@+id/action_clear_db"
+        android:title="@string/action_clear_db_title"
+        android:showAsAction="never"
+        android:orderInCategory="2"/>
 </menu>
