@@ -19,7 +19,7 @@ public class CountersContract {
         public static final String COLUMN_ID = "_id";
         public static final String COLUMN_NAME = "name";
         public static final String COLUMN_COUNT_INT_BITS = "count_int_bits";
-        public static final String COLUMN_COUNT_DEC_BITS = "count_dec_bits";
+        public static final String COLUMN_COUNT_FRAC_BITS = "count_frac_bits";
         public static final String COLUMN_UNITS_MEASURE = "units_measure";
         public static final String COLUMN_RATE = "rate";
         public static final String COLUMN_CURRENCY = "currency";
