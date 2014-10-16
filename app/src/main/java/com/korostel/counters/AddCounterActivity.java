@@ -2,14 +2,12 @@ package com.korostel.counters;
 
 import android.app.Activity;
 import android.content.ContentValues;
-import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -105,9 +103,9 @@ public class AddCounterActivity extends Activity {
         contentValues.put(CountersEntry.COLUMN_NAME, etAddCounterName.getText().toString());
         contentValues.put(CountersEntry.COLUMN_COUNT_INT_BITS, Integer.parseInt(etAddCounterIntBits.getText().toString()));
         if (etAddCounterDecBits.getText().toString().isEmpty()) {
-            contentValues.put(CountersEntry.COLUMN_COUNT_DEC_BITS, 0);
+            contentValues.put(CountersEntry.COLUMN_COUNT_FRAC_BITS, 0);
         } else {
-            contentValues.put(CountersEntry.COLUMN_COUNT_DEC_BITS, Integer.parseInt(etAddCounterDecBits.getText().toString()));
+            contentValues.put(CountersEntry.COLUMN_COUNT_FRAC_BITS, Integer.parseInt(etAddCounterDecBits.getText().toString()));
         }
         contentValues.put(CountersEntry.COLUMN_UNITS_MEASURE, etAddCounterUnitsMeasure.getText().toString());
         contentValues.put(CountersEntry.COLUMN_RATE, Double.parseDouble(etAddCounterRate.getText().toString()));
