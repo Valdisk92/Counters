@@ -58,6 +58,9 @@ public class MainActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 ((Counter)adapterView.getItemAtPosition(i)).getId();
+                //TODO Создать активность, отображающую показания для определенных счетчиков
+                //TODO Создать адаптер принимающий id счетчика и возвращающий правильный список
+                //TODO Реализвать метотд setOnItemClickListener
             }
         });
     }
