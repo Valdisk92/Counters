@@ -2,23 +2,18 @@ package com.korostel.counters;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 
-import com.korostel.counters.data.CountersContract.*;
-import com.korostel.counters.data.CountersDBHelper;
 import com.korostel.counters.data.DB;
 
 
 public class MainActivity extends Activity {
 
     ListView lvCounters;
-    SimpleCursorAdapter adapter;
+    CountersAdapter adapter;
 
 
     @Override
@@ -46,32 +41,23 @@ public class MainActivity extends Activity {
                 return true;
 
             case R.id.action_clear_db:
-                DB db = new DB(this);
-                db.open();
+                DB db = DB.getInstance(this);
                 db.clearDB();
-                db.close();
-                Cursor cursor = adapter.getCursor();
-                cursor.requery();
+                adapter.updateAdapter();
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
     private void setListView() {
-        DB db = new DB(this);
-        db.open();
-        Cursor cursor = db.getAllData(CountersEntry.TABLE_NAME);
-        startManagingCursor(cursor);
-        String[] from = new String[] {CountersEntry.COLUMN_NAME};
-        int[] to = new int[] {R.id.tvListCountersName};
-        adapter = new SimpleCursorAdapter(this, R.layout.item, cursor, from, to);
+        adapter = new CountersAdapter(this);
         lvCounters.setAdapter(adapter);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
-            adapter.notifyDataSetChanged();
+            adapter.updateAdapter();
         }
     }
 }

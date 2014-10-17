@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.korostel.counters.data.CountersContract.*;
 import com.korostel.counters.data.CountersDBHelper;
+import com.korostel.counters.data.DB;
 
 
 public class AddCounterActivity extends Activity {
@@ -87,6 +88,7 @@ public class AddCounterActivity extends Activity {
         if (id == R.id.action_add_counter_confirm) {
             if (checkEditText()) {
                 addToDb();
+                setResult(RESULT_OK);
                 finish();
             }
             return true;
@@ -96,9 +98,8 @@ public class AddCounterActivity extends Activity {
 
     private void addToDb() {
         Log.d(LOG_TAG, "---addToDb():");
-        CountersDBHelper dbHelper = new CountersDBHelper(this);
+        DB db = DB.getInstance(this);
         ContentValues contentValues = new ContentValues();
-        SQLiteDatabase database = dbHelper.getWritableDatabase();
 
         contentValues.put(CountersEntry.COLUMN_NAME, etAddCounterName.getText().toString());
         contentValues.put(CountersEntry.COLUMN_COUNT_INT_BITS, Integer.parseInt(etAddCounterIntBits.getText().toString()));
@@ -111,9 +112,8 @@ public class AddCounterActivity extends Activity {
         contentValues.put(CountersEntry.COLUMN_RATE, Double.parseDouble(etAddCounterRate.getText().toString()));
         contentValues.put(CountersEntry.COLUMN_CURRENCY, etAddCounterCurrency.getText().toString());
 
-        long rowId = database.insert(CountersEntry.TABLE_NAME, null, contentValues);
+        long rowId = db.insert(CountersEntry.TABLE_NAME, contentValues);
         Log.d(LOG_TAG, "row inserted: ID = " + rowId);
-        dbHelper.close();
     }
 
     private boolean checkEditText() {
