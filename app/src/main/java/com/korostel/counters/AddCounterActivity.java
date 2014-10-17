@@ -18,12 +18,13 @@ import android.widget.TextView;
 
 import com.korostel.counters.data.CountersContract.*;
 import com.korostel.counters.data.CountersDBHelper;
+import com.korostel.counters.data.DB;
 
 
 public class AddCounterActivity extends Activity {
 
     private static final String LOG_TAG = AddCounterActivity.class.getSimpleName();
-    EditText etAddCounterName, etAddCounterIntBits, etAddCounterDecBits, etAddCounterUnitsMeasure,
+    EditText etAddCounterName, etAddCounterIntBits, etAddCounterFracBits, etAddCounterUnitsMeasure,
              etAddCounterRate, etAddCounterCurrency;
 
     TextView tvAddCounterDecBits;
@@ -36,13 +37,13 @@ public class AddCounterActivity extends Activity {
 
         etAddCounterName = (EditText)findViewById(R.id.etAddCounterName);
         etAddCounterIntBits = (EditText)findViewById(R.id.etAddCounterIntBits);
-        etAddCounterDecBits = (EditText)findViewById(R.id.etAddCounterDecBits);
+        etAddCounterFracBits = (EditText)findViewById(R.id.etAddCounterFracBits);
         etAddCounterUnitsMeasure = (EditText)findViewById(R.id.etAddCounterUnitsMeasure);
         etAddCounterRate = (EditText)findViewById(R.id.etAddCounterRate);
         etAddCounterCurrency = (EditText)findViewById(R.id.etAddCounterCurrency);
         setOnTextChangeListener(etAddCounterName);
         setOnTextChangeListener(etAddCounterIntBits);
-        setOnTextChangeListener(etAddCounterDecBits);
+        setOnTextChangeListener(etAddCounterFracBits);
         setOnTextChangeListener(etAddCounterUnitsMeasure);
         setOnTextChangeListener(etAddCounterRate);
         setOnTextChangeListener(etAddCounterCurrency);
@@ -53,7 +54,7 @@ public class AddCounterActivity extends Activity {
         switchAddCounterShowDecBits = (Switch)findViewById(R.id.switchAddCounterShowDecBits);
 
 
-        etAddCounterDecBits.setVisibility(View.GONE);
+        etAddCounterFracBits.setVisibility(View.GONE);
         tvAddCounterDecBits.setVisibility(View.GONE);
 
         switchAddCounterShowDecBits.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -61,11 +62,11 @@ public class AddCounterActivity extends Activity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     tvAddCounterDecBits.setVisibility(View.VISIBLE);
-                    etAddCounterDecBits.setVisibility(View.VISIBLE);
+                    etAddCounterFracBits.setVisibility(View.VISIBLE);
                     switchAddCounterShowDecBits.setText("Вкл");
                 } else {
                     tvAddCounterDecBits.setVisibility(View.GONE);
-                    etAddCounterDecBits.setVisibility(View.GONE);
+                    etAddCounterFracBits.setVisibility(View.GONE);
                     switchAddCounterShowDecBits.setText("Выкл");
                 }
             }
@@ -87,6 +88,7 @@ public class AddCounterActivity extends Activity {
         if (id == R.id.action_add_counter_confirm) {
             if (checkEditText()) {
                 addToDb();
+                setResult(RESULT_OK);
                 finish();
             }
             return true;
@@ -96,24 +98,22 @@ public class AddCounterActivity extends Activity {
 
     private void addToDb() {
         Log.d(LOG_TAG, "---addToDb():");
-        CountersDBHelper dbHelper = new CountersDBHelper(this);
+        DB db = DB.getInstance(this);
         ContentValues contentValues = new ContentValues();
-        SQLiteDatabase database = dbHelper.getWritableDatabase();
 
         contentValues.put(CountersEntry.COLUMN_NAME, etAddCounterName.getText().toString());
         contentValues.put(CountersEntry.COLUMN_COUNT_INT_BITS, Integer.parseInt(etAddCounterIntBits.getText().toString()));
-        if (etAddCounterDecBits.getText().toString().isEmpty()) {
+        if (etAddCounterFracBits.getText().toString().isEmpty()) {
             contentValues.put(CountersEntry.COLUMN_COUNT_FRAC_BITS, 0);
         } else {
-            contentValues.put(CountersEntry.COLUMN_COUNT_FRAC_BITS, Integer.parseInt(etAddCounterDecBits.getText().toString()));
+            contentValues.put(CountersEntry.COLUMN_COUNT_FRAC_BITS, Integer.parseInt(etAddCounterFracBits.getText().toString()));
         }
         contentValues.put(CountersEntry.COLUMN_UNITS_MEASURE, etAddCounterUnitsMeasure.getText().toString());
         contentValues.put(CountersEntry.COLUMN_RATE, Double.parseDouble(etAddCounterRate.getText().toString()));
         contentValues.put(CountersEntry.COLUMN_CURRENCY, etAddCounterCurrency.getText().toString());
 
-        long rowId = database.insert(CountersEntry.TABLE_NAME, null, contentValues);
+        long rowId = db.insert(CountersEntry.TABLE_NAME, contentValues);
         Log.d(LOG_TAG, "row inserted: ID = " + rowId);
-        dbHelper.close();
     }
 
     private boolean checkEditText() {
@@ -126,8 +126,8 @@ public class AddCounterActivity extends Activity {
             etAddCounterIntBits.setBackgroundResource(R.drawable.edit_text_error_bg);
             state = false;
         }
-        if (switchAddCounterShowDecBits.isChecked() && etAddCounterDecBits.getText().toString().isEmpty()) {
-            etAddCounterDecBits.setBackgroundResource(R.drawable.edit_text_error_bg);
+        if (switchAddCounterShowDecBits.isChecked() && etAddCounterFracBits.getText().toString().isEmpty()) {
+            etAddCounterFracBits.setBackgroundResource(R.drawable.edit_text_error_bg);
             state = false;
         }
         if (etAddCounterUnitsMeasure.getText().toString().isEmpty()) {

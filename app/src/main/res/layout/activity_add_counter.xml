@@ -78,7 +78,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/etAddCounterDecBits"
+                android:id="@+id/etAddCounterFracBits"
                 android:textSize="@dimen/text_view_h3"
                 android:hint="2" />
 
