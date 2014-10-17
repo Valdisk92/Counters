@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.korostel.counters.data.CountersContract.CountersEntry;
-import com.korostel.counters.data.CountersContract.ValuesEntry;
+import com.korostel.counters.data.CountersContract.IndicationsEntry;
 
 /**
  * Created by korostel on 07.09.14.
@@ -32,15 +32,15 @@ public class CountersDBHelper extends SQLiteOpenHelper {
                 CountersEntry.COLUMN_RATE + " REAL NOT NULL," +
                 CountersEntry.COLUMN_CURRENCY + " TEXT NOT NULL" + ");");
 
-        Log.d(LOG_TAG, "---CREATE TABLE: " + ValuesEntry.TABLE_NAME);
-        db.execSQL("CREATE TABLE " + ValuesEntry.TABLE_NAME + " (" +
-                ValuesEntry.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                ValuesEntry.COLUMN_YEAR + " INTEGER NOT NULL," +
-                ValuesEntry.COLUMN_MONTH + " TEXT NOT NULL," +
-                ValuesEntry.COLUMN_INDICATION + " INTEGER NOT NULL," +
-                ValuesEntry.COLUMN_PRICE + " REAL NOT NULL," +
-                ValuesEntry.COLUMN_COUNTER_ID + " INTEGER NOT NULL," +
-                "FOREIGN KEY(" + ValuesEntry.COLUMN_COUNTER_ID + ") " +
+        Log.d(LOG_TAG, "---CREATE TABLE: " + IndicationsEntry.TABLE_NAME);
+        db.execSQL("CREATE TABLE " + IndicationsEntry.TABLE_NAME + " (" +
+                IndicationsEntry.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                IndicationsEntry.COLUMN_YEAR + " INTEGER NOT NULL," +
+                IndicationsEntry.COLUMN_MONTH + " TEXT NOT NULL," +
+                IndicationsEntry.COLUMN_INDICATION + " INTEGER NOT NULL," +
+                IndicationsEntry.COLUMN_PRICE + " REAL NOT NULL," +
+                IndicationsEntry.COLUMN_COUNTER_ID + " INTEGER NOT NULL," +
+                "FOREIGN KEY(" + IndicationsEntry.COLUMN_COUNTER_ID + ") " +
                     "REFERENCES " + CountersEntry.TABLE_NAME + "(" + CountersEntry.COLUMN_ID + ")" + ");");
     }
 

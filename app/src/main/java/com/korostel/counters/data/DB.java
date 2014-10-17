@@ -4,9 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.widget.SimpleCursorAdapter;
-
-import com.korostel.counters.R;
 
 /**
  * Created by korostel on 11.09.2014.
@@ -41,7 +38,7 @@ public class DB {
         this.open();
         database.execSQL("DELETE FROM " + CountersContract.CountersEntry.TABLE_NAME + ";");
         database.execSQL("VACUUM;");
-        database.execSQL("DELETE FROM " + CountersContract.ValuesEntry.TABLE_NAME + ";");
+        database.execSQL("DELETE FROM " + CountersContract.IndicationsEntry.TABLE_NAME + ";");
         database.execSQL("VACUUM;");
         //this.close();
     }

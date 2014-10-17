@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.korostel.counters.data.DB;
@@ -52,6 +54,12 @@ public class MainActivity extends Activity {
     private void setListView() {
         adapter = new CountersAdapter(this);
         lvCounters.setAdapter(adapter);
+        lvCounters.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                ((Counter)adapterView.getItemAtPosition(i)).getId();
+            }
+        });
     }
 
     @Override

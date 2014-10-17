@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.korostel.counters.data.CountersContract;
+import com.korostel.counters.data.CountersContract.*;
 import com.korostel.counters.data.DB;
 
 import java.util.ArrayList;
@@ -35,11 +35,17 @@ public class CountersAdapter extends BaseAdapter {
     private ArrayList<Counter> getAllCounters(Context context) {
         DB db = DB.getInstance(context);
         ArrayList<Counter> counters = new ArrayList<Counter>();
-        Cursor cursor = db.getAllData(CountersContract.CountersEntry.TABLE_NAME);
+        Cursor cursor = db.getAllData(CountersEntry.TABLE_NAME);
         if (cursor.moveToFirst()) {
             do {
                 Counter counter = new Counter();
-                counter.setName(cursor.getString(cursor.getColumnIndex(CountersContract.CountersEntry.COLUMN_NAME)));
+                counter.setName(cursor.getString(cursor.getColumnIndex(CountersEntry.COLUMN_NAME)));
+                counter.setId(cursor.getInt(cursor.getColumnIndex(CountersEntry.COLUMN_ID)));
+                counter.setIntBits(cursor.getInt(cursor.getColumnIndex(CountersEntry.COLUMN_COUNT_INT_BITS)));
+                counter.setFracBits(cursor.getInt(cursor.getColumnIndex(CountersEntry.COLUMN_COUNT_FRAC_BITS)));
+                counter.setUnitsMeasure(cursor.getString(cursor.getColumnIndex(CountersEntry.COLUMN_UNITS_MEASURE)));
+                counter.setRate(cursor.getDouble(cursor.getColumnIndex(CountersEntry.COLUMN_RATE)));
+                counter.setCurrency(cursor.getString(cursor.getColumnIndex(CountersEntry.COLUMN_CURRENCY)));
                 counters.add(counter);
             } while (cursor.moveToNext());
         }
@@ -80,7 +86,6 @@ public class CountersAdapter extends BaseAdapter {
     }
 
     public void updateAdapter() {
-        Log.d(LOG_TAG, "METHOD: updateAdapter()");
         mCounters = getAllCounters(mContext);
         notifyDataSetChanged();
     }

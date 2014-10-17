@@ -26,7 +26,7 @@ public class CountersContract {
 
     }
 
-    public class ValuesEntry implements BaseColumns {
+    public class IndicationsEntry implements BaseColumns {
 
         public static final String TABLE_NAME = "indications";
 
