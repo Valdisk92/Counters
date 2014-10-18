@@ -43,10 +43,33 @@ public class DB {
         //this.close();
     }
 
-    public Cursor getAllData(String tableName) {
+    public Cursor getAllCounters() {
         this.open();
-        Cursor cursor = database.query(tableName, null, null, null, null, null, null);
+        Cursor cursor = database.query(
+                CountersContract.CountersEntry.TABLE_NAME,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+        );
         //this.close();
+        return cursor;
+    }
+
+    public Cursor getIndicationsByCounterId(int counterId) {
+        this.open();
+        Cursor cursor = database.query(
+                CountersContract.IndicationsEntry.TABLE_NAME,
+                null,
+                CountersContract.IndicationsEntry.COLUMN_COUNTER_ID + " = ?",
+                new String[]{String.valueOf(counterId)},
+                null,
+                null,
+                null
+        );
+//        Cursor cursor = database.rawQuery("SELECT * FROM indications WHERE counter_id = " + counterId + ";", null);
         return cursor;
     }
 

@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Новый счетчик"
-        android:id="@+id/textView"
+        android:id="@+id/tvIndications"
         android:textSize="@dimen/text_view_h1" />
 
     <ScrollView

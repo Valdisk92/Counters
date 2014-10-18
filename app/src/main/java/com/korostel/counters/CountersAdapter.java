@@ -2,7 +2,6 @@ package com.korostel.counters;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,13 +28,13 @@ public class CountersAdapter extends BaseAdapter {
     public CountersAdapter(Context context) {
         mContext = context;
         mLayoutInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        mCounters = getAllCounters(context);
+        mCounters = getAllCounters();
     }
 
-    private ArrayList<Counter> getAllCounters(Context context) {
-        DB db = DB.getInstance(context);
+    private ArrayList<Counter> getAllCounters() {
+        DB db = DB.getInstance(mContext);
         ArrayList<Counter> counters = new ArrayList<Counter>();
-        Cursor cursor = db.getAllData(CountersEntry.TABLE_NAME);
+        Cursor cursor = db.getAllCounters();
         if (cursor.moveToFirst()) {
             do {
                 Counter counter = new Counter();
@@ -86,7 +85,7 @@ public class CountersAdapter extends BaseAdapter {
     }
 
     public void updateAdapter() {
-        mCounters = getAllCounters(mContext);
+        mCounters = getAllCounters();
         notifyDataSetChanged();
     }
 }

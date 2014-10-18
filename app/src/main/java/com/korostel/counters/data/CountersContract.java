@@ -33,7 +33,8 @@ public class CountersContract {
         public static final String COLUMN_ID = "_id";
         public static final String COLUMN_YEAR = "year";
         public static final String COLUMN_MONTH = "month";
-        public static final String COLUMN_INDICATION = "indication";
+        public static final String COLUMN_CURRENT_INDICATION = "current_indication";
+        public static final String COLUMN_PREVIOUS_INDICATION = "previous_indication";
         public static final String COLUMN_PRICE = "price";
         public static final String COLUMN_COUNTER_ID = "counter_id";
     }

@@ -37,7 +37,8 @@ public class CountersDBHelper extends SQLiteOpenHelper {
                 IndicationsEntry.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 IndicationsEntry.COLUMN_YEAR + " INTEGER NOT NULL," +
                 IndicationsEntry.COLUMN_MONTH + " TEXT NOT NULL," +
-                IndicationsEntry.COLUMN_INDICATION + " INTEGER NOT NULL," +
+                IndicationsEntry.COLUMN_PREVIOUS_INDICATION + " INTEGER NOT NULL," +
+                IndicationsEntry.COLUMN_CURRENT_INDICATION + " INTEGER NOT NULL," +
                 IndicationsEntry.COLUMN_PRICE + " REAL NOT NULL," +
                 IndicationsEntry.COLUMN_COUNTER_ID + " INTEGER NOT NULL," +
                 "FOREIGN KEY(" + IndicationsEntry.COLUMN_COUNTER_ID + ") " +

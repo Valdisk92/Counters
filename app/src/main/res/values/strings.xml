@@ -7,5 +7,7 @@
     <string name="action_add_counter_label">Add</string>
     <string name="title_activity_add_counter">AddCounterActivity</string>
     <string name="action_clear_db_title">Clear DB</string>
+    <string name="title_activity_indication">IndicationsActivity</string>
+    <string name="title_activity_add_indication">AddIndicationActivity</string>
 
 </resources>

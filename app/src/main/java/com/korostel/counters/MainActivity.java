@@ -3,16 +3,20 @@ package com.korostel.counters;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.korostel.counters.data.CountersContract;
 import com.korostel.counters.data.DB;
 
 
 public class MainActivity extends Activity {
+
+    private static final String LOG_TAG = MainActivity.class.getSimpleName();
 
     ListView lvCounters;
     CountersAdapter adapter;
@@ -57,10 +61,11 @@ public class MainActivity extends Activity {
         lvCounters.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                ((Counter)adapterView.getItemAtPosition(i)).getId();
-                //TODO Создать активность, отображающую показания для определенных счетчиков
-                //TODO Создать адаптер принимающий id счетчика и возвращающий правильный список
-                //TODO Реализвать метотд setOnItemClickListener
+                int counterId = ((Counter)adapterView.getItemAtPosition(i)).getId();
+                Log.d(LOG_TAG, "Counter ID = " + counterId);
+                Intent intent = new Intent(MainActivity.this, IndicationsActivity.class);
+                intent.putExtra(CountersContract.IndicationsEntry.COLUMN_COUNTER_ID, counterId);
+                startActivity(intent);
             }
         });
     }
