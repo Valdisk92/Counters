@@ -13,7 +13,7 @@ public class Counter {
     private String unitsMeasure;
     private double rate;
     private String currency;
-    private ArrayList<Indication> indications;
+    private long startValue;
 
     public Counter() {
     }
@@ -72,5 +72,13 @@ public class Counter {
 
     public void setCurrency(String currency) {
         this.currency = currency;
+    }
+
+    public long getStartValue() {
+        return startValue;
+    }
+
+    public void setStartValue(long startValue) {
+        this.startValue = startValue;
     }
 }

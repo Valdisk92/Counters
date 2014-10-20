@@ -27,7 +27,11 @@ public class IndicationsActivity extends Activity {
     private int counterId;
     private double counterRate;
     private IndicationsAdapter adapter;
-    private Indication mNewIndication;
+    private long counterStartValue;
+    private int counterIntBits;
+    private int counterFracBits;
+    private String counterUnitsMeasure;
+    private String counterCurrency;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,12 +41,19 @@ public class IndicationsActivity extends Activity {
         intent = getIntent();
         counterId = intent.getIntExtra(CountersContract.IndicationsEntry.COLUMN_COUNTER_ID, 0);
         counterRate = intent.getDoubleExtra(CountersContract.CountersEntry.COLUMN_RATE, 0.0);
+        counterStartValue = intent.getLongExtra(CountersContract.CountersEntry.COLUMN_START_VALUE, 0);
+        counterIntBits = intent.getIntExtra(CountersContract.CountersEntry.COLUMN_COUNT_INT_BITS, 0);
+        counterFracBits = intent.getIntExtra(CountersContract.CountersEntry.COLUMN_COUNT_FRAC_BITS, 0);
+        counterUnitsMeasure = intent.getStringExtra(CountersContract.CountersEntry.COLUMN_UNITS_MEASURE);
+        counterCurrency = intent.getStringExtra(CountersContract.CountersEntry.COLUMN_CURRENCY);
+
+        Bundle bundle = intent.getExtras();
         lvIndications = (ListView)findViewById(R.id.lvIndications);
-        setListView();
+        setListView(bundle);
     }
 
-    private void setListView() {
-        adapter = new IndicationsAdapter(this, counterId);
+    private void setListView(Bundle bundle) {
+        adapter = new IndicationsAdapter(this, counterId, bundle);
         lvIndications.setAdapter(adapter);
     }
 
@@ -101,14 +112,19 @@ public class IndicationsActivity extends Activity {
     }
 
     private Indication setNewIndication(long currentIndicationValue) {
-        Indication previousIndication = ((Indication)adapter.getItem(0));
+        long previousIndicationValue;
+        if (adapter.getCount() == 0) {
+            previousIndicationValue = counterStartValue;
+        } else {
+            previousIndicationValue = ((Indication)adapter.getItem(0)).getCurrIndicationValue();
+        }
         Indication newIndication = new Indication();
         Calendar calendar =  Calendar.getInstance();
         newIndication.setYear(calendar.get(Calendar.YEAR));
         newIndication.setMonth(calendar.get(Calendar.MONTH));
         newIndication.setCurrIndicationValue(currentIndicationValue);
-        newIndication.setPrevIndicationValue(previousIndication.getCurrIndicationValue());
-        newIndication.setPrice((currentIndicationValue - previousIndication.getCurrIndicationValue()) * counterRate);
+        newIndication.setPrevIndicationValue(previousIndicationValue);
+        newIndication.setPrice((currentIndicationValue - previousIndicationValue) * counterRate);
         newIndication.setCounterId(counterId);
 
         return newIndication;

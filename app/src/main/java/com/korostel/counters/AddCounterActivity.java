@@ -21,11 +21,11 @@ import com.korostel.counters.data.CountersDBHelper;
 import com.korostel.counters.data.DB;
 
 
-public class    AddCounterActivity extends Activity {
+public class AddCounterActivity extends Activity {
 
     private static final String LOG_TAG = AddCounterActivity.class.getSimpleName();
     EditText etAddCounterName, etAddCounterIntBits, etAddCounterFracBits, etAddCounterUnitsMeasure,
-             etAddCounterRate, etAddCounterCurrency;
+             etAddCounterRate, etAddCounterCurrency, etAddCounterStartValue;
 
     TextView tvAddCounterDecBits;
     Switch switchAddCounterShowDecBits;
@@ -41,12 +41,14 @@ public class    AddCounterActivity extends Activity {
         etAddCounterUnitsMeasure = (EditText)findViewById(R.id.etAddCounterUnitsMeasure);
         etAddCounterRate = (EditText)findViewById(R.id.etAddCounterRate);
         etAddCounterCurrency = (EditText)findViewById(R.id.etAddCounterCurrency);
+        etAddCounterStartValue = (EditText)findViewById(R.id.etAddCounterStartValue);
         setOnTextChangeListener(etAddCounterName);
         setOnTextChangeListener(etAddCounterIntBits);
         setOnTextChangeListener(etAddCounterFracBits);
         setOnTextChangeListener(etAddCounterUnitsMeasure);
         setOnTextChangeListener(etAddCounterRate);
         setOnTextChangeListener(etAddCounterCurrency);
+        setOnTextChangeListener(etAddCounterStartValue);
 
 
         tvAddCounterDecBits = (TextView)findViewById(R.id.tvAddCounterDecBits);
@@ -111,6 +113,7 @@ public class    AddCounterActivity extends Activity {
         contentValues.put(CountersEntry.COLUMN_UNITS_MEASURE, etAddCounterUnitsMeasure.getText().toString());
         contentValues.put(CountersEntry.COLUMN_RATE, Double.parseDouble(etAddCounterRate.getText().toString()));
         contentValues.put(CountersEntry.COLUMN_CURRENCY, etAddCounterCurrency.getText().toString());
+        contentValues.put(CountersEntry.COLUMN_START_VALUE, String.valueOf(etAddCounterStartValue.getText().toString()));
 
         long rowId = db.insert(CountersEntry.TABLE_NAME, contentValues);
         Log.d(LOG_TAG, "row inserted: ID = " + rowId);
@@ -140,6 +143,10 @@ public class    AddCounterActivity extends Activity {
         }
         if (etAddCounterCurrency.getText().toString().isEmpty()) {
             etAddCounterCurrency.setBackgroundResource(R.drawable.edit_text_error_bg);
+            state = false;
+        }
+        if (etAddCounterStartValue.getText().toString().isEmpty()) {
+            etAddCounterStartValue.setBackgroundResource(R.drawable.edit_text_error_bg);
             state = false;
         }
 

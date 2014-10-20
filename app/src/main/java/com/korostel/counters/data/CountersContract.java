@@ -23,6 +23,7 @@ public class CountersContract {
         public static final String COLUMN_UNITS_MEASURE = "units_measure";
         public static final String COLUMN_RATE = "rate";
         public static final String COLUMN_CURRENCY = "currency";
+        public static final String COLUMN_START_VALUE = "start_value";
 
     }
 

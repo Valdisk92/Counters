@@ -30,7 +30,8 @@ public class CountersDBHelper extends SQLiteOpenHelper {
                 CountersEntry.COLUMN_COUNT_FRAC_BITS + " INTEGER NOT NULL," +
                 CountersEntry.COLUMN_UNITS_MEASURE + " TEXT NOT NULL," +
                 CountersEntry.COLUMN_RATE + " REAL NOT NULL," +
-                CountersEntry.COLUMN_CURRENCY + " TEXT NOT NULL" + ");");
+                CountersEntry.COLUMN_CURRENCY + " TEXT NOT NULL," +
+                CountersEntry.COLUMN_START_VALUE + " INTEGER NOT NULL);");
 
         Log.d(LOG_TAG, "---CREATE TABLE: " + IndicationsEntry.TABLE_NAME);
         db.execSQL("CREATE TABLE " + IndicationsEntry.TABLE_NAME + " (" +

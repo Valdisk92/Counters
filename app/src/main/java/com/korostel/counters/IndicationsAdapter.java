@@ -2,6 +2,7 @@ package com.korostel.counters;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,10 +10,12 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.korostel.counters.data.CountersContract;
 import com.korostel.counters.data.DB;
 import com.korostel.counters.data.CountersContract.IndicationsEntry;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  * Created by korostel on 18.10.2014.
@@ -23,19 +26,27 @@ public class IndicationsAdapter extends BaseAdapter {
 
     private Context mContext;
     private LayoutInflater mLayoutInflater;
-    private ArrayList<Indication> mIndications;
+    private LinkedList<Indication> mIndications;
     private int mCounterId;
+//    private int counterIntBits;
+//    private int counterFracBits;
+    private String counterUnitsMeasure;
+    private String counterCurrency;
 
-    public IndicationsAdapter(Context context, int counterId) {
+    public IndicationsAdapter(Context context, int counterId, Bundle bundle) {
         mContext = context;
         mLayoutInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mCounterId = counterId;
         mIndications = getAllIndications();
+//        counterIntBits = bundle.getInt(CountersContract.CountersEntry.COLUMN_COUNT_INT_BITS, 0);
+//        counterFracBits = bundle.getInt(CountersContract.CountersEntry.COLUMN_COUNT_FRAC_BITS, 0);
+        counterUnitsMeasure = bundle.getString(CountersContract.CountersEntry.COLUMN_UNITS_MEASURE);
+        counterCurrency = bundle.getString(CountersContract.CountersEntry.COLUMN_CURRENCY);
     }
 
-    private ArrayList<Indication> getAllIndications() {
+    private LinkedList<Indication> getAllIndications() {
         DB db = DB.getInstance(mContext);
-        ArrayList<Indication> indications = new ArrayList<Indication>();
+        LinkedList<Indication> indications = new LinkedList<Indication>();
         Cursor cursor = db.getIndicationsByCounterId(mCounterId);
         if (cursor.moveToFirst()) {
             do {
@@ -47,10 +58,13 @@ public class IndicationsAdapter extends BaseAdapter {
                 indication.setYear(cursor.getInt(cursor.getColumnIndex(IndicationsEntry.COLUMN_YEAR)));
                 indication.setMonth(cursor.getInt(cursor.getColumnIndex(IndicationsEntry.COLUMN_MONTH)));
                 indication.setCounterId(cursor.getInt(cursor.getColumnIndex(IndicationsEntry.COLUMN_COUNTER_ID)));
+                indications.push(indication);
             } while (cursor.moveToNext());
         } else {
             Log.d(LOG_TAG, "CURSOR IS EMPTY");
         }
+
+        Log.d(LOG_TAG, indications.toString());
 
         return indications;
     }
@@ -78,8 +92,10 @@ public class IndicationsAdapter extends BaseAdapter {
         }
 
         Indication indication = getIndication(position);
-        ((TextView)v.findViewById(R.id.tvListIndicationIndication)).setText(indication.getCurrIndicationValue() + "");
-        //TODO Добавить все значения показаний
+        ((TextView)v.findViewById(R.id.tvIndicationItemCurrIndValue)).setText(indication.getCurrIndicationValue() + " " + counterUnitsMeasure + ".");
+        ((TextView)v.findViewById(R.id.tvIndicationItemPrice)).setText(indication.getPrice() + " " + counterCurrency + ".");
+        ((TextView)v.findViewById(R.id.tvIndicationItemYear)).setText(indication.getYear() + "");
+        ((TextView)v.findViewById(R.id.tvIndicationItemMonth)).setText(indication.getMonth() + "");
         return v;
     }
 

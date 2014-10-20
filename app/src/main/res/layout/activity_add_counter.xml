@@ -124,6 +124,20 @@
                 android:textSize="@dimen/text_view_h3"
                 android:hint="грн, евро, дол" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Начальное показание:"
+                android:id="@+id/textView9"
+                android:textSize="@dimen/text_view_h3" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/etAddCounterStartValue"
+                android:textSize="@dimen/text_view_h3"
+                android:hint="..." />
+
         </LinearLayout>
 
     </ScrollView>

@@ -45,6 +45,7 @@ public class CountersAdapter extends BaseAdapter {
                 counter.setUnitsMeasure(cursor.getString(cursor.getColumnIndex(CountersEntry.COLUMN_UNITS_MEASURE)));
                 counter.setRate(cursor.getDouble(cursor.getColumnIndex(CountersEntry.COLUMN_RATE)));
                 counter.setCurrency(cursor.getString(cursor.getColumnIndex(CountersEntry.COLUMN_CURRENCY)));
+                counter.setStartValue(cursor.getLong(cursor.getColumnIndex(CountersEntry.COLUMN_START_VALUE)));
                 counters.add(counter);
             } while (cursor.moveToNext());
         }
