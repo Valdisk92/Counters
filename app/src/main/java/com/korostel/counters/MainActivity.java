@@ -62,9 +62,11 @@ public class MainActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 int counterId = ((Counter)adapterView.getItemAtPosition(i)).getId();
+                double rate = ((Counter)adapterView.getItemAtPosition(i)).getRate();
                 Log.d(LOG_TAG, "Counter ID = " + counterId);
                 Intent intent = new Intent(MainActivity.this, IndicationsActivity.class);
                 intent.putExtra(CountersContract.IndicationsEntry.COLUMN_COUNTER_ID, counterId);
+                intent.putExtra(CountersContract.CountersEntry.COLUMN_RATE, rate);
                 startActivity(intent);
             }
         });

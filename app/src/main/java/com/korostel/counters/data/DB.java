@@ -69,7 +69,6 @@ public class DB {
                 null,
                 null
         );
-//        Cursor cursor = database.rawQuery("SELECT * FROM indications WHERE counter_id = " + counterId + ";", null);
         return cursor;
     }
 

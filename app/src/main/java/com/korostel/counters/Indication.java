@@ -5,12 +5,11 @@ package com.korostel.counters;
  */
 public class Indication {
     private int mYear;
-    private String mMonth;
+    private int mMonth;
     private int mIndicationId;
     private long mPrevIndication;
     private long mCurrIndication;
     private double mPrice;
-    private double mDifference;
     private int mCounterId;
 
     public Indication() {
@@ -41,27 +40,27 @@ public class Indication {
         this.mYear = mYear;
     }
 
-    public String getMonth() {
+    public int getMonth() {
         return mMonth;
     }
 
-    public void setMonth(String mMonth) {
+    public void setMonth(int mMonth) {
         this.mMonth = mMonth;
     }
 
-    public long getPrevIndication() {
+    public long getPrevIndicationValue() {
         return mPrevIndication;
     }
 
-    public void setPrevIndication(long mPrevIndication) {
+    public void setPrevIndicationValue(long mPrevIndication) {
         this.mPrevIndication = mPrevIndication;
     }
 
-    public long getCurrIndication() {
+    public long getCurrIndicationValue() {
         return mCurrIndication;
     }
 
-    public void setCurrIndication(long mCurrIndication) {
+    public void setCurrIndicationValue(long mCurrIndication) {
         this.mCurrIndication = mCurrIndication;
     }
 
@@ -71,13 +70,5 @@ public class Indication {
 
     public void setPrice(double mPrice) {
         this.mPrice = mPrice;
-    }
-
-    public double getDifference() {
-        return mDifference;
-    }
-
-    public void setDifference(double mDifference) {
-        this.mDifference = mDifference;
     }
 }

@@ -41,11 +41,11 @@ public class IndicationsAdapter extends BaseAdapter {
             do {
                 Indication indication = new Indication();
                 indication.setIndicationId(cursor.getInt(cursor.getColumnIndex(IndicationsEntry.COLUMN_ID)));
-                indication.setPrevIndication(cursor.getInt(cursor.getColumnIndex(IndicationsEntry.COLUMN_PREVIOUS_INDICATION)));
-                indication.setCurrIndication(cursor.getInt(cursor.getColumnIndex(IndicationsEntry.COLUMN_CURRENT_INDICATION)));
+                indication.setPrevIndicationValue(cursor.getInt(cursor.getColumnIndex(IndicationsEntry.COLUMN_PREVIOUS_INDICATION)));
+                indication.setCurrIndicationValue(cursor.getInt(cursor.getColumnIndex(IndicationsEntry.COLUMN_CURRENT_INDICATION)));
                 indication.setPrice(cursor.getDouble(cursor.getColumnIndex(IndicationsEntry.COLUMN_PRICE)));
                 indication.setYear(cursor.getInt(cursor.getColumnIndex(IndicationsEntry.COLUMN_YEAR)));
-                indication.setMonth(cursor.getString(cursor.getColumnIndex(IndicationsEntry.COLUMN_MONTH)));
+                indication.setMonth(cursor.getInt(cursor.getColumnIndex(IndicationsEntry.COLUMN_MONTH)));
                 indication.setCounterId(cursor.getInt(cursor.getColumnIndex(IndicationsEntry.COLUMN_COUNTER_ID)));
             } while (cursor.moveToNext());
         } else {
@@ -78,12 +78,17 @@ public class IndicationsAdapter extends BaseAdapter {
         }
 
         Indication indication = getIndication(position);
-        ((TextView)v.findViewById(R.id.tvListIndicationIndication)).setText(indication.getCurrIndication() + "");
+        ((TextView)v.findViewById(R.id.tvListIndicationIndication)).setText(indication.getCurrIndicationValue() + "");
         //TODO Добавить все значения показаний
         return v;
     }
 
     private Indication getIndication(int position) {
         return ((Indication)getItem(position));
+    }
+
+    public void updateAdapter() {
+        mIndications = getAllIndications();
+        notifyDataSetChanged();
     }
 }

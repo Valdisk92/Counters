@@ -24,10 +24,6 @@
             android:name=".IndicationsActivity"
             android:label="@string/title_activity_indication" >
         </activity>
-        <activity
-            android:name=".AddIndicationActivity"
-            android:label="@string/title_activity_add_indication" >
-        </activity>
     </application>
 
 </manifest>

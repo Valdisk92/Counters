@@ -21,7 +21,7 @@ import com.korostel.counters.data.CountersDBHelper;
 import com.korostel.counters.data.DB;
 
 
-public class AddCounterActivity extends Activity {
+public class    AddCounterActivity extends Activity {
 
     private static final String LOG_TAG = AddCounterActivity.class.getSimpleName();
     EditText etAddCounterName, etAddCounterIntBits, etAddCounterFracBits, etAddCounterUnitsMeasure,
