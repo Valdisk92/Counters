@@ -11,9 +11,43 @@ public class Indication {
     private long mCurrIndication;
     private double mPrice;
     private int mCounterId;
+    private int mDate;
 
     public Indication() {
 
+    }
+
+    public String getStringMonth() {
+        String month;
+        switch (mMonth) {
+            case 1: month = "Янаварь";
+                break;
+            case 2: month = "Февраль";
+                break;
+            case 3: month = "Март";
+                break;
+            case 4: month = "Апрель";
+                break;
+            case 5: month = "Май";
+                break;
+            case 6: month = "Июнь";
+                break;
+            case 7: month = "Июль";
+                break;
+            case 8: month = "Август";
+                break;
+            case 9: month = "Сентябрь";
+                break;
+            case 10: month = "Октябрь";
+                break;
+            case 11: month = "Ноябрь";
+                break;
+            case 12: month = "Декабрь";
+                break;
+            default: month = "Default";
+        }
+
+        return month;
     }
 
     public int getIndicationId() {
@@ -70,5 +104,13 @@ public class Indication {
 
     public void setPrice(double mPrice) {
         this.mPrice = mPrice;
+    }
+
+    public int getDate() {
+        return mDate;
+    }
+
+    public void setDate(int mDate) {
+        this.mDate = mDate;
     }
 }

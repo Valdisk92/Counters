@@ -12,7 +12,7 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ListView;
 
-import com.korostel.counters.data.CountersContract;
+import com.korostel.counters.data.CountersContract.*;
 import com.korostel.counters.data.DB;
 
 import java.util.Calendar;
@@ -39,13 +39,13 @@ public class IndicationsActivity extends Activity {
         setContentView(R.layout.activity_indication);
 
         intent = getIntent();
-        counterId = intent.getIntExtra(CountersContract.IndicationsEntry.COLUMN_COUNTER_ID, 0);
-        counterRate = intent.getDoubleExtra(CountersContract.CountersEntry.COLUMN_RATE, 0.0);
-        counterStartValue = intent.getLongExtra(CountersContract.CountersEntry.COLUMN_START_VALUE, 0);
-        counterIntBits = intent.getIntExtra(CountersContract.CountersEntry.COLUMN_COUNT_INT_BITS, 0);
-        counterFracBits = intent.getIntExtra(CountersContract.CountersEntry.COLUMN_COUNT_FRAC_BITS, 0);
-        counterUnitsMeasure = intent.getStringExtra(CountersContract.CountersEntry.COLUMN_UNITS_MEASURE);
-        counterCurrency = intent.getStringExtra(CountersContract.CountersEntry.COLUMN_CURRENCY);
+        counterId = intent.getIntExtra(IndicationsEntry.COLUMN_COUNTER_ID, 0);
+        counterRate = intent.getDoubleExtra(CountersEntry.COLUMN_RATE, 0.0);
+        counterStartValue = intent.getLongExtra(CountersEntry.COLUMN_START_VALUE, 0);
+        counterIntBits = intent.getIntExtra(CountersEntry.COLUMN_COUNT_INT_BITS, 0);
+        counterFracBits = intent.getIntExtra(CountersEntry.COLUMN_COUNT_FRAC_BITS, 0);
+        counterUnitsMeasure = intent.getStringExtra(CountersEntry.COLUMN_UNITS_MEASURE);
+        counterCurrency = intent.getStringExtra(CountersEntry.COLUMN_CURRENCY);
 
         Bundle bundle = intent.getExtras();
         lvIndications = (ListView)findViewById(R.id.lvIndications);
@@ -60,16 +60,12 @@ public class IndicationsActivity extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.indication, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_add_indication) {
             final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
@@ -99,19 +95,20 @@ public class IndicationsActivity extends Activity {
     private void addToDb(long currentIndicationValue) {
         DB db = DB.getInstance(this);
         ContentValues contentValues = new ContentValues();
-        Indication currentIndication = setNewIndication(currentIndicationValue);
-        contentValues.put(CountersContract.IndicationsEntry.COLUMN_MONTH, currentIndication.getMonth());
-        contentValues.put(CountersContract.IndicationsEntry.COLUMN_YEAR, currentIndication.getYear());
-        contentValues.put(CountersContract.IndicationsEntry.COLUMN_CURRENT_INDICATION, currentIndication.getCurrIndicationValue());
-        contentValues.put(CountersContract.IndicationsEntry.COLUMN_PREVIOUS_INDICATION, currentIndication.getPrevIndicationValue());
-        contentValues.put(CountersContract.IndicationsEntry.COLUMN_PRICE, currentIndication.getPrice());
-        contentValues.put(CountersContract.IndicationsEntry.COLUMN_COUNTER_ID, currentIndication.getCounterId());
+        Indication currentIndication = setUpNewIndication(currentIndicationValue);
+        contentValues.put(IndicationsEntry.COLUMN_MONTH, currentIndication.getMonth());
+        contentValues.put(IndicationsEntry.COLUMN_YEAR, currentIndication.getYear());
+        contentValues.put(IndicationsEntry.COLUMN_DATE, currentIndication.getDate());
+        contentValues.put(IndicationsEntry.COLUMN_CURRENT_INDICATION, currentIndication.getCurrIndicationValue());
+        contentValues.put(IndicationsEntry.COLUMN_PREVIOUS_INDICATION, currentIndication.getPrevIndicationValue());
+        contentValues.put(IndicationsEntry.COLUMN_PRICE, currentIndication.getPrice());
+        contentValues.put(IndicationsEntry.COLUMN_COUNTER_ID, currentIndication.getCounterId());
 
-        long rowid = db.insert(CountersContract.IndicationsEntry.TABLE_NAME, contentValues);
-        Log.d(LOG_TAG, "addToDb(): row inserted id = " + rowid);
+        long rowId = db.insert(IndicationsEntry.TABLE_NAME, contentValues);
+        Log.d(LOG_TAG, "addToDb(): row inserted id = " + rowId);
     }
 
-    private Indication setNewIndication(long currentIndicationValue) {
+    private Indication setUpNewIndication(long currentIndicationValue) {
         long previousIndicationValue;
         if (adapter.getCount() == 0) {
             previousIndicationValue = counterStartValue;
@@ -122,6 +119,7 @@ public class IndicationsActivity extends Activity {
         Calendar calendar =  Calendar.getInstance();
         newIndication.setYear(calendar.get(Calendar.YEAR));
         newIndication.setMonth(calendar.get(Calendar.MONTH));
+        newIndication.setDate(calendar.get(Calendar.DATE));
         newIndication.setCurrIndicationValue(currentIndicationValue);
         newIndication.setPrevIndicationValue(previousIndicationValue);
         newIndication.setPrice((currentIndicationValue - previousIndicationValue) * counterRate);

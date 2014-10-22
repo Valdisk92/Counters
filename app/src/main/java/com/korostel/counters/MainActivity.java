@@ -18,8 +18,8 @@ public class MainActivity extends Activity {
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
 
-    ListView lvCounters;
-    CountersAdapter adapter;
+    private ListView lvCounters;
+    private CountersAdapter adapter;
 
 
     @Override
@@ -79,6 +79,14 @@ public class MainActivity extends Activity {
                 intent.putExtra(CountersContract.CountersEntry.COLUMN_UNITS_MEASURE, unitsMeasure);
                 intent.putExtra(CountersContract.CountersEntry.COLUMN_CURRENCY, currency);
                 startActivity(intent);
+            }
+        });
+        lvCounters.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                //TODO создать активность для изменения счетчика
+                //TODO реализовать данный метод
+                return false;
             }
         });
     }

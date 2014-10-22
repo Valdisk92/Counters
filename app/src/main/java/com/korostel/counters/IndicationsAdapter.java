@@ -14,7 +14,6 @@ import com.korostel.counters.data.CountersContract;
 import com.korostel.counters.data.DB;
 import com.korostel.counters.data.CountersContract.IndicationsEntry;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
@@ -57,6 +56,7 @@ public class IndicationsAdapter extends BaseAdapter {
                 indication.setPrice(cursor.getDouble(cursor.getColumnIndex(IndicationsEntry.COLUMN_PRICE)));
                 indication.setYear(cursor.getInt(cursor.getColumnIndex(IndicationsEntry.COLUMN_YEAR)));
                 indication.setMonth(cursor.getInt(cursor.getColumnIndex(IndicationsEntry.COLUMN_MONTH)));
+                indication.setDate(cursor.getInt(cursor.getColumnIndex(IndicationsEntry.COLUMN_DATE)));
                 indication.setCounterId(cursor.getInt(cursor.getColumnIndex(IndicationsEntry.COLUMN_COUNTER_ID)));
                 indications.push(indication);
             } while (cursor.moveToNext());
@@ -95,7 +95,8 @@ public class IndicationsAdapter extends BaseAdapter {
         ((TextView)v.findViewById(R.id.tvIndicationItemCurrIndValue)).setText(indication.getCurrIndicationValue() + " " + counterUnitsMeasure + ".");
         ((TextView)v.findViewById(R.id.tvIndicationItemPrice)).setText(indication.getPrice() + " " + counterCurrency + ".");
         ((TextView)v.findViewById(R.id.tvIndicationItemYear)).setText(indication.getYear() + "");
-        ((TextView)v.findViewById(R.id.tvIndicationItemMonth)).setText(indication.getMonth() + "");
+        ((TextView)v.findViewById(R.id.tvIndicationItemMonth)).setText(indication.getStringMonth());
+        ((TextView)v.findViewById(R.id.tvIndicationItemDate)).setText(indication.getDate() + "");
         return v;
     }
 

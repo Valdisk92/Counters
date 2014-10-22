@@ -72,7 +72,7 @@ public class CountersAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         View v = view;
         if (v == null) {
-            v = mLayoutInflater.inflate(R.layout.item, viewGroup, false);
+            v = mLayoutInflater.inflate(R.layout.item_counter, viewGroup, false);
         }
 
         Counter counter = getCounter(i);

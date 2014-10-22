@@ -48,4 +48,15 @@
         android:layout_below="@+id/tvIndicationItemCurrIndValue"
         android:textSize="@dimen/text_view_h2"
         android:layout_alignParentRight="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date"
+        android:id="@+id/tvIndicationItemDate"
+        android:layout_alignBottom="@+id/tvIndicationItemMonth"
+        android:layout_toRightOf="@+id/tvIndicationItemMonth"
+        android:layout_toEndOf="@+id/tvIndicationItemMonth"
+        android:textSize="@dimen/text_view_h1"
+        android:paddingLeft="@dimen/activity_horizontal_margin" />
 </RelativeLayout>
