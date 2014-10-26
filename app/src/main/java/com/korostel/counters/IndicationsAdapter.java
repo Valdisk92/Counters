@@ -27,8 +27,6 @@ public class IndicationsAdapter extends BaseAdapter {
     private LayoutInflater mLayoutInflater;
     private LinkedList<Indication> mIndications;
     private int mCounterId;
-//    private int counterIntBits;
-//    private int counterFracBits;
     private String counterUnitsMeasure;
     private String counterCurrency;
 
@@ -37,8 +35,6 @@ public class IndicationsAdapter extends BaseAdapter {
         mLayoutInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mCounterId = counterId;
         mIndications = getAllIndications();
-//        counterIntBits = bundle.getInt(CountersContract.CountersEntry.COLUMN_COUNT_INT_BITS, 0);
-//        counterFracBits = bundle.getInt(CountersContract.CountersEntry.COLUMN_COUNT_FRAC_BITS, 0);
         counterUnitsMeasure = bundle.getString(CountersContract.CountersEntry.COLUMN_UNITS_MEASURE);
         counterCurrency = bundle.getString(CountersContract.CountersEntry.COLUMN_CURRENCY);
     }

@@ -127,7 +127,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Начальное показание:"
+                android:text="Последнее значение:"
                 android:id="@+id/textView9"
                 android:textSize="@dimen/text_view_h3" />
 
