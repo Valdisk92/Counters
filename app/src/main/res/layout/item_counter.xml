@@ -11,7 +11,7 @@
         android:paddingRight="16dp"
         android:gravity="center_vertical"
         android:id="@+id/tvListCountersName"
-        android:textSize="22sp"
+        android:textSize="@dimen/text_view_h3"
         android:layout_width="match_parent"
         android:layout_height="48dp" />
 

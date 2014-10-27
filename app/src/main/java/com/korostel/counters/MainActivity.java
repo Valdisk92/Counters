@@ -64,8 +64,6 @@ public class MainActivity extends Activity {
                 int counterId = ((Counter)adapterView.getItemAtPosition(i)).getId();
                 double rate = ((Counter)adapterView.getItemAtPosition(i)).getRate();
                 long startValue = ((Counter)adapterView.getItemAtPosition(i)).getStartValue();
-                int intBits = ((Counter)adapterView.getItemAtPosition(i)).getIntBits();
-                int fracBits = ((Counter)adapterView.getItemAtPosition(i)).getFracBits();
                 String unitsMeasure = ((Counter)adapterView.getItemAtPosition(i)).getUnitsMeasure();
                 String currency = ((Counter)adapterView.getItemAtPosition(i)).getCurrency();
 
@@ -74,8 +72,6 @@ public class MainActivity extends Activity {
                 intent.putExtra(CountersContract.IndicationsEntry.COLUMN_COUNTER_ID, counterId);
                 intent.putExtra(CountersContract.CountersEntry.COLUMN_RATE, rate);
                 intent.putExtra(CountersContract.CountersEntry.COLUMN_START_VALUE, startValue);
-                intent.putExtra(CountersContract.CountersEntry.COLUMN_COUNT_INT_BITS, intBits);
-                intent.putExtra(CountersContract.CountersEntry.COLUMN_COUNT_FRAC_BITS, fracBits);
                 intent.putExtra(CountersContract.CountersEntry.COLUMN_UNITS_MEASURE, unitsMeasure);
                 intent.putExtra(CountersContract.CountersEntry.COLUMN_CURRENCY, currency);
                 startActivity(intent);

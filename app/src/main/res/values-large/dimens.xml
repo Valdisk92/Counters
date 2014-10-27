@@ -3,8 +3,8 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="text_view_h1">55sp</dimen>
-    <dimen name="text_view_h2">35sp</dimen>
-    <dimen name="text_view_h3">25sp</dimen>
-    <dimen name="text_view_h4">20sp</dimen>
+    <dimen name="text_view_h2">45sp</dimen>
+    <dimen name="text_view_h3">35sp</dimen>
+    <dimen name="text_view_h4">25sp</dimen>
     <dimen name="text_medium">18sp</dimen>
 </resources>

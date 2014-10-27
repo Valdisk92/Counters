@@ -40,8 +40,6 @@ public class CountersAdapter extends BaseAdapter {
                 Counter counter = new Counter();
                 counter.setName(cursor.getString(cursor.getColumnIndex(CountersEntry.COLUMN_NAME)));
                 counter.setId(cursor.getInt(cursor.getColumnIndex(CountersEntry.COLUMN_ID)));
-                counter.setIntBits(cursor.getInt(cursor.getColumnIndex(CountersEntry.COLUMN_COUNT_INT_BITS)));
-                counter.setFracBits(cursor.getInt(cursor.getColumnIndex(CountersEntry.COLUMN_COUNT_FRAC_BITS)));
                 counter.setUnitsMeasure(cursor.getString(cursor.getColumnIndex(CountersEntry.COLUMN_UNITS_MEASURE)));
                 counter.setRate(cursor.getDouble(cursor.getColumnIndex(CountersEntry.COLUMN_RATE)));
                 counter.setCurrency(cursor.getString(cursor.getColumnIndex(CountersEntry.COLUMN_CURRENCY)));

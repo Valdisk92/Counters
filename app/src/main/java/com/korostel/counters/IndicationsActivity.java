@@ -6,11 +6,14 @@ import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.korostel.counters.data.CountersContract.*;
 import com.korostel.counters.data.DB;
@@ -28,8 +31,6 @@ public class IndicationsActivity extends Activity {
     private double counterRate;
     private IndicationsAdapter adapter;
     private long counterStartValue;
-    private int counterIntBits;
-    private int counterFracBits;
     private String counterUnitsMeasure;
     private String counterCurrency;
 
@@ -42,8 +43,6 @@ public class IndicationsActivity extends Activity {
         counterId = intent.getIntExtra(IndicationsEntry.COLUMN_COUNTER_ID, 0);
         counterRate = intent.getDoubleExtra(CountersEntry.COLUMN_RATE, 0.0);
         counterStartValue = intent.getLongExtra(CountersEntry.COLUMN_START_VALUE, 0);
-        counterIntBits = intent.getIntExtra(CountersEntry.COLUMN_COUNT_INT_BITS, 0);
-        counterFracBits = intent.getIntExtra(CountersEntry.COLUMN_COUNT_FRAC_BITS, 0);
         counterUnitsMeasure = intent.getStringExtra(CountersEntry.COLUMN_UNITS_MEASURE);
         counterCurrency = intent.getStringExtra(CountersEntry.COLUMN_CURRENCY);
 
@@ -76,8 +75,8 @@ public class IndicationsActivity extends Activity {
             dialog.setPositiveButton("Add", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    addToDb(Long.parseLong(input.getText().toString()));
-                    adapter.updateAdapter();
+                        addToDb(Long.parseLong(input.getText().toString()));
+                        adapter.updateAdapter();
                 }
             });
             dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

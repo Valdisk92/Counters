@@ -1,21 +1,18 @@
 package com.korostel.counters;
 
-import java.util.ArrayList;
-
 /**
  * Created by korostel on 16.10.2014.
  */
 public class Counter {
     private int id;
     private String name;
-    private int intBits;
-    private int fracBits;
     private String unitsMeasure;
     private double rate;
     private String currency;
     private long startValue;
 
     public Counter() {
+
     }
 
     public String getName() {
@@ -32,22 +29,6 @@ public class Counter {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getIntBits() {
-        return intBits;
-    }
-
-    public void setIntBits(int intBits) {
-        this.intBits = intBits;
-    }
-
-    public int getFracBits() {
-        return fracBits;
-    }
-
-    public void setFracBits(int fracBits) {
-        this.fracBits = fracBits;
     }
 
     public String getUnitsMeasure() {

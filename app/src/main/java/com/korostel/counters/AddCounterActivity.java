@@ -24,11 +24,8 @@ import com.korostel.counters.data.DB;
 public class AddCounterActivity extends Activity {
 
     private static final String LOG_TAG = AddCounterActivity.class.getSimpleName();
-    EditText etAddCounterName, etAddCounterIntBits, etAddCounterFracBits, etAddCounterUnitsMeasure,
+    EditText etAddCounterName, etAddCounterUnitsMeasure,
              etAddCounterRate, etAddCounterCurrency, etAddCounterStartValue;
-
-    TextView tvAddCounterDecBits;
-    Switch switchAddCounterShowDecBits;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,44 +33,15 @@ public class AddCounterActivity extends Activity {
         setContentView(R.layout.activity_add_counter);
 
         etAddCounterName = (EditText)findViewById(R.id.etAddCounterName);
-        etAddCounterIntBits = (EditText)findViewById(R.id.etAddCounterIntBits);
-        etAddCounterFracBits = (EditText)findViewById(R.id.etAddCounterFracBits);
         etAddCounterUnitsMeasure = (EditText)findViewById(R.id.etAddCounterUnitsMeasure);
         etAddCounterRate = (EditText)findViewById(R.id.etAddCounterRate);
         etAddCounterCurrency = (EditText)findViewById(R.id.etAddCounterCurrency);
         etAddCounterStartValue = (EditText)findViewById(R.id.etAddCounterStartValue);
         setOnTextChangeListener(etAddCounterName);
-        setOnTextChangeListener(etAddCounterIntBits);
-        setOnTextChangeListener(etAddCounterFracBits);
         setOnTextChangeListener(etAddCounterUnitsMeasure);
         setOnTextChangeListener(etAddCounterRate);
         setOnTextChangeListener(etAddCounterCurrency);
         setOnTextChangeListener(etAddCounterStartValue);
-
-
-        tvAddCounterDecBits = (TextView)findViewById(R.id.tvAddCounterDecBits);
-
-        switchAddCounterShowDecBits = (Switch)findViewById(R.id.switchAddCounterShowDecBits);
-
-
-        etAddCounterFracBits.setVisibility(View.GONE);
-        tvAddCounterDecBits.setVisibility(View.GONE);
-
-        switchAddCounterShowDecBits.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    tvAddCounterDecBits.setVisibility(View.VISIBLE);
-                    etAddCounterFracBits.setVisibility(View.VISIBLE);
-                    switchAddCounterShowDecBits.setText("Вкл");
-                } else {
-                    tvAddCounterDecBits.setVisibility(View.GONE);
-                    etAddCounterFracBits.setVisibility(View.GONE);
-                    switchAddCounterShowDecBits.setText("Выкл");
-                }
-            }
-        });
-
     }
 
 
@@ -104,12 +72,6 @@ public class AddCounterActivity extends Activity {
         ContentValues contentValues = new ContentValues();
 
         contentValues.put(CountersEntry.COLUMN_NAME, etAddCounterName.getText().toString());
-        contentValues.put(CountersEntry.COLUMN_COUNT_INT_BITS, Integer.parseInt(etAddCounterIntBits.getText().toString()));
-        if (etAddCounterFracBits.getText().toString().isEmpty()) {
-            contentValues.put(CountersEntry.COLUMN_COUNT_FRAC_BITS, 0);
-        } else {
-            contentValues.put(CountersEntry.COLUMN_COUNT_FRAC_BITS, Integer.parseInt(etAddCounterFracBits.getText().toString()));
-        }
         contentValues.put(CountersEntry.COLUMN_UNITS_MEASURE, etAddCounterUnitsMeasure.getText().toString());
         contentValues.put(CountersEntry.COLUMN_RATE, Double.parseDouble(etAddCounterRate.getText().toString()));
         contentValues.put(CountersEntry.COLUMN_CURRENCY, etAddCounterCurrency.getText().toString());
@@ -121,16 +83,8 @@ public class AddCounterActivity extends Activity {
 
     private boolean checkEditText() {
         boolean state = true;
-        if (etAddCounterName.getText().toString().equals("")) {
+        if (etAddCounterName.getText().toString().isEmpty()) {
             etAddCounterName.setBackgroundResource(R.drawable.edit_text_error_bg);
-            state = false;
-        }
-        if (etAddCounterIntBits.getText().toString().isEmpty()) {
-            etAddCounterIntBits.setBackgroundResource(R.drawable.edit_text_error_bg);
-            state = false;
-        }
-        if (switchAddCounterShowDecBits.isChecked() && etAddCounterFracBits.getText().toString().isEmpty()) {
-            etAddCounterFracBits.setBackgroundResource(R.drawable.edit_text_error_bg);
             state = false;
         }
         if (etAddCounterUnitsMeasure.getText().toString().isEmpty()) {

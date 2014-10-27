@@ -26,8 +26,6 @@ public class CountersDBHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE " + CountersEntry.TABLE_NAME + " (" +
                 CountersEntry.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 CountersEntry.COLUMN_NAME + " TEXT NOT NULL," +
-                CountersEntry.COLUMN_COUNT_INT_BITS + " INTEGER NOT NULL," +
-                CountersEntry.COLUMN_COUNT_FRAC_BITS + " INTEGER NOT NULL," +
                 CountersEntry.COLUMN_UNITS_MEASURE + " TEXT NOT NULL," +
                 CountersEntry.COLUMN_RATE + " REAL NOT NULL," +
                 CountersEntry.COLUMN_CURRENCY + " TEXT NOT NULL," +
