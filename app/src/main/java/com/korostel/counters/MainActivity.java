@@ -14,6 +14,7 @@ import com.korostel.counters.data.CountersContract;
 import com.korostel.counters.data.DB;
 
 
+//TODO По возможности добавить какую-то фичу и если хватит у тебя сил, то переделать под фрагменты =)
 public class MainActivity extends Activity {
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();

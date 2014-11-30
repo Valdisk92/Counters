@@ -121,6 +121,7 @@ public class IndicationsActivity extends Activity {
         newIndication.setDate(calendar.get(Calendar.DATE));
         newIndication.setCurrIndicationValue(currentIndicationValue);
         newIndication.setPrevIndicationValue(previousIndicationValue);
+        //TODO Сделать нормальный просчет стоимости с округлением
         newIndication.setPrice((currentIndicationValue - previousIndicationValue) * counterRate);
         newIndication.setCounterId(counterId);
 

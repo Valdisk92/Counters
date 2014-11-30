@@ -20,7 +20,8 @@ import com.korostel.counters.data.CountersContract.*;
 import com.korostel.counters.data.CountersDBHelper;
 import com.korostel.counters.data.DB;
 
-
+//TODO Сделать проверку на входные значения.
+//TODO Сделать шрифт боле ли менее нормального и адекватного размера
 public class AddCounterActivity extends Activity {
 
     private static final String LOG_TAG = AddCounterActivity.class.getSimpleName();
