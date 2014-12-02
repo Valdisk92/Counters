@@ -5,5 +5,12 @@
         <item name="android:colorPrimary">#ff359bce</item>
         <item name="android:colorPrimaryDark">#ff3686ba</item>
     </style>
+    <style name="TextViewTheme">
+        <item name="android:textSize">@dimen/text_large</item>
+    </style>
+
+    <style name="EditTextTheme">
+        <item name="android:textSize">@dimen/text_medium</item>
+    </style>
 
 </resources>

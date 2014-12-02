@@ -62,4 +62,16 @@ public class Counter {
     public void setStartValue(long startValue) {
         this.startValue = startValue;
     }
+
+    @Override
+    public String toString() {
+        return "Counter{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", unitsMeasure='" + unitsMeasure + '\'' +
+                ", rate=" + rate +
+                ", currency='" + currency + '\'' +
+                ", startValue=" + startValue +
+                '}';
+    }
 }

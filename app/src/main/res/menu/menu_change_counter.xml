@@ -1,0 +1,9 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.korostel.counters.ChangeCounterActivity" >
+    <item android:id="@+id/action_change_counter_confirm"
+        android:title="Confirm"
+        android:orderInCategory="100"
+        android:icon="@drawable/ic_done_white_48dp"
+        android:showAsAction="always" />
+</menu>

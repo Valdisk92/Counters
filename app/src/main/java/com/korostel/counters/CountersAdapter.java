@@ -79,8 +79,15 @@ public class CountersAdapter extends BaseAdapter {
         return v;
     }
 
-    private Counter getCounter(int i) {
+    public Counter getCounter(int i) {
         return ((Counter)getItem(i));
+    }
+
+    public void deleteCounter(long pos) {
+        DB db = DB.getInstance(mContext);
+        Counter counter = mCounters.get((int) pos);
+        db.deleteCounterById(counter.getId());
+        updateAdapter();
     }
 
     public void updateAdapter() {

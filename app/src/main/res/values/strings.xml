@@ -2,12 +2,12 @@
 <resources>
 
     <string name="app_name">Counters</string>
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="action_add_counter_label">Add</string>
-    <string name="title_activity_add_counter">AddCounterActivity</string>
-    <string name="action_clear_db_title">Clear DB</string>
-    <string name="title_activity_indication">IndicationsActivity</string>
+    <string name="title_activity_add_counter">Новый счетчик</string>
+    <string name="action_clear_db_title">Очистить базу</string>
+    <string name="title_activity_indication">Показания</string>
     <string name="title_activity_add_indication">AddIndicationActivity</string>
+    <string name="title_activity_change_counter">Изменить счетчик</string>
 
 </resources>

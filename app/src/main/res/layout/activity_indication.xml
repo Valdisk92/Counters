@@ -8,24 +8,10 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.korostel.counters.IndicationsActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Indications"
-        android:id="@+id/tvIndications"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:textSize="@dimen/text_view_h2"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true" />
-
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/lvIndications"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/tvIndications" />
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"/>
 </RelativeLayout>

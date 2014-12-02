@@ -100,6 +100,13 @@ public class IndicationsAdapter extends BaseAdapter {
         return ((Indication)getItem(position));
     }
 
+    public void deleteIndication(long pos) {
+        Indication indication = mIndications.get((int) pos);
+        DB db = DB.getInstance(mContext);
+        db.deleteIndicationById(indication.getIndicationId());
+        updateAdapter();
+    }
+
     public void updateAdapter() {
         mIndications = getAllIndications();
         notifyDataSetChanged();

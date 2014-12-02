@@ -7,10 +7,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -50,7 +54,25 @@ public class IndicationsActivity extends Activity {
 
         Bundle bundle = intent.getExtras();
         lvIndications = (ListView)findViewById(R.id.lvIndications);
+        registerForContextMenu(lvIndications);
         setListView(bundle);
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        getMenuInflater().inflate(R.menu.indication_context_menu, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
+        switch (item.getItemId()) {
+            case R.id.action_delete_indication:
+                adapter.deleteIndication(info.id);
+                Toast.makeText(this, "TOAST " + info.id, Toast.LENGTH_SHORT).show();
+        }
+        return true;
     }
 
     private void setListView(Bundle bundle) {
@@ -70,9 +92,10 @@ public class IndicationsActivity extends Activity {
         int id = item.getItemId();
         if (id == R.id.action_add_indication) {
             final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-            dialog.setTitle("Add indication");
-            dialog.setMessage("Enter new indication: ");
+            dialog.setTitle("Новое показание");
+            dialog.setMessage("Введите новое показание счетчика:");
             final EditText input = new EditText(this);
+            input.setInputType(InputType.TYPE_CLASS_NUMBER);
             dialog.setView(input);
             dialog.setPositiveButton("Add", new DialogInterface.OnClickListener() {
                 @Override
@@ -123,7 +146,6 @@ public class IndicationsActivity extends Activity {
         newIndication.setDate(calendar.get(Calendar.DATE));
         newIndication.setCurrIndicationValue(currentIndicationValue);
         newIndication.setPrevIndicationValue(previousIndicationValue);
-        //TODO Сделать нормальный просчет стоимости с округлением
         double price = (currentIndicationValue - previousIndicationValue) * counterRate;
         double newDouble = new BigDecimal(price).setScale(2, RoundingMode.UP).doubleValue();
         newIndication.setPrice(newDouble);

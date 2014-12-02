@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TextViewTheme">
+        <item name="android:textSize">@dimen/text_large</item>
+    </style>
+
+    <style name="EditTextTheme">
+        <item name="android:textSize">@dimen/text_medium</item>
+    </style>
+</resources>

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,6 +30,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         lvCounters = (ListView)findViewById(R.id.lvCounters);
+        registerForContextMenu(lvCounters);
         setListView();
     }
 
@@ -36,6 +38,28 @@ public class MainActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        getMenuInflater().inflate(R.menu.counter_context_menu, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
+        switch (item.getItemId()) {
+            case R.id.action_delete_counter:
+                adapter.deleteCounter(info.id);
+                break;
+            case R.id.action_change_counter:
+                Intent intent = new Intent(this, ChangeCounterActivity.class);
+                intent.putExtra("counterId", adapter.getCounter((int) info.id).getId());
+                startActivityForResult(intent, 2);
+                break;
+        }
         return true;
     }
 
@@ -76,14 +100,6 @@ public class MainActivity extends Activity {
                 intent.putExtra(CountersContract.CountersEntry.COLUMN_UNITS_MEASURE, unitsMeasure);
                 intent.putExtra(CountersContract.CountersEntry.COLUMN_CURRENCY, currency);
                 startActivity(intent);
-            }
-        });
-        lvCounters.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                //TODO создать активность для изменения счетчика
-                //TODO реализовать данный метод
-                return false;
             }
         });
     }

@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
+            android:name="com.korostel.counters.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,12 +17,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AddCounterActivity"
+            android:name="com.korostel.counters.AddCounterActivity"
             android:label="@string/title_activity_add_counter" >
         </activity>
         <activity
-            android:name=".IndicationsActivity"
+            android:name="com.korostel.counters.IndicationsActivity"
             android:label="@string/title_activity_indication" >
+        </activity>
+        <activity
+            android:name="com.korostel.counters.ChangeCounterActivity"
+            android:label="@string/title_activity_change_counter" >
         </activity>
     </application>
 

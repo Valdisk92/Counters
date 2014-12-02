@@ -34,6 +34,22 @@ public class DB {
         }
     }
 
+    public Cursor getCounterById(int id) {
+        this.open();
+        Cursor cursor = database.rawQuery("SELECT * FROM " + CountersContract.CountersEntry.TABLE_NAME + " WHERE " + CountersContract.CountersEntry.COLUMN_ID + " = " + id, null);
+        return cursor;
+    }
+
+    public void deleteIndicationById(int id) {
+        this.open();
+        database.delete(CountersContract.IndicationsEntry.TABLE_NAME, CountersContract.IndicationsEntry.COLUMN_ID + "=?", new String[]{id+""});
+    }
+
+    public void deleteCounterById(int id) {
+        this.open();
+        database.delete(CountersContract.CountersEntry.TABLE_NAME, CountersContract.CountersEntry.COLUMN_ID + "=?", new String[]{id+""});
+    }
+
     public void clearDB() {
         this.open();
         database.execSQL("DELETE FROM " + CountersContract.CountersEntry.TABLE_NAME + ";");
