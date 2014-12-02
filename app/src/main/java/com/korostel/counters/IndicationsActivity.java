@@ -18,6 +18,8 @@ import android.widget.Toast;
 import com.korostel.counters.data.CountersContract.*;
 import com.korostel.counters.data.DB;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Calendar;
 
 
@@ -122,7 +124,9 @@ public class IndicationsActivity extends Activity {
         newIndication.setCurrIndicationValue(currentIndicationValue);
         newIndication.setPrevIndicationValue(previousIndicationValue);
         //TODO Сделать нормальный просчет стоимости с округлением
-        newIndication.setPrice((currentIndicationValue - previousIndicationValue) * counterRate);
+        double price = (currentIndicationValue - previousIndicationValue) * counterRate;
+        double newDouble = new BigDecimal(price).setScale(2, RoundingMode.UP).doubleValue();
+        newIndication.setPrice(newDouble);
         newIndication.setCounterId(counterId);
 
         return newIndication;

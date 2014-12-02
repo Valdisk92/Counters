@@ -7,4 +7,5 @@
     <dimen name="text_view_h3">25sp</dimen>
     <dimen name="text_view_h4">20sp</dimen>
     <dimen name="text_medium">18sp</dimen>
+    <dimen name="text_large">22sp</dimen>
 </resources>

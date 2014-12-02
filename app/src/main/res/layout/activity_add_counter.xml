@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:text="Новый счетчик"
         android:id="@+id/tvIndications"
-        android:textSize="@dimen/text_view_h2" />
+        android:textSize="@dimen/text_large" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -29,14 +29,14 @@
                 android:layout_height="wrap_content"
                 android:text="Название:"
                 android:id="@+id/textView2"
-                android:textSize="@dimen/text_view_h3"
+                android:textSize="@dimen/text_medium"
                 android:paddingTop="@dimen/activity_vertical_margin"/>
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/etAddCounterName"
-                android:textSize="@dimen/text_view_h3"
+                android:textSize="@dimen/text_medium"
                 android:hint="Счетчик №1" />
 
             <TextView
@@ -44,14 +44,14 @@
                 android:layout_height="wrap_content"
                 android:text="Еденицы измерения:"
                 android:id="@+id/textView6"
-                android:textSize="@dimen/text_view_h3"
+                android:textSize="@dimen/text_medium"
                 android:paddingTop="@dimen/activity_vertical_margin"/>
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/etAddCounterUnitsMeasure"
-                android:textSize="@dimen/text_view_h3"
+                android:textSize="@dimen/text_medium"
                 android:hint="куб.м, кВт" />
 
             <TextView
@@ -59,14 +59,14 @@
                 android:layout_height="wrap_content"
                 android:text="Тариф:"
                 android:id="@+id/textView7"
-                android:textSize="@dimen/text_view_h3"
+                android:textSize="@dimen/text_medium"
                 android:paddingTop="@dimen/activity_vertical_margin"/>
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/etAddCounterRate"
-                android:textSize="@dimen/text_view_h3"
+                android:textSize="@dimen/text_medium"
                 android:hint="25.05"
                 android:paddingTop="@dimen/activity_vertical_margin"/>
 
@@ -75,14 +75,14 @@
                 android:layout_height="wrap_content"
                 android:text="Валюта:"
                 android:id="@+id/textView8"
-                android:textSize="@dimen/text_view_h3"
+                android:textSize="@dimen/text_medium"
                 android:paddingTop="@dimen/activity_vertical_margin"/>
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/etAddCounterCurrency"
-                android:textSize="@dimen/text_view_h3"
+                android:textSize="@dimen/text_medium"
                 android:hint="грн, евро, дол" />
 
             <TextView
@@ -90,14 +90,14 @@
                 android:layout_height="wrap_content"
                 android:text="Последнее значение:"
                 android:id="@+id/textView9"
-                android:textSize="@dimen/text_view_h3"
+                android:textSize="@dimen/text_medium"
                 android:paddingTop="@dimen/activity_vertical_margin"/>
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/etAddCounterStartValue"
-                android:textSize="@dimen/text_view_h3"
+                android:textSize="@dimen/text_medium"
                 android:hint="..." />
 
         </LinearLayout>
